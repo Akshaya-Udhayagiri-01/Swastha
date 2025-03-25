@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const backendURL = "https://swastha-jgce.onrender.com";
     const loginForm = document.getElementById("loginForm");
     const signupForm = document.getElementById("signupForm");
 
@@ -6,18 +7,18 @@ document.addEventListener("DOMContentLoaded", () => {
     if (loginForm) {
         loginForm.addEventListener("submit", async (e) => {
             e.preventDefault();
-            
+
             const email = document.getElementById("loginEmail").value;
             const password = document.getElementById("loginPassword").value;
 
-            const res = await fetch("http://localhost:5000/api/auth/login", {
+            const res = await fetch(`${backendURL}/api/auth/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, password })
+                body: JSON.stringify({ email, password }),
             });
 
             const data = await res.json();
-            
+
             if (!res.ok) {
                 alert(data.message || "Invalid email or password.");
                 return;
@@ -33,19 +34,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if (signupForm) {
         signupForm.addEventListener("submit", async (e) => {
             e.preventDefault();
-            
+
             const name = document.getElementById("signupName").value;
             const email = document.getElementById("signupEmail").value;
             const password = document.getElementById("signupPassword").value;
 
-            const res = await fetch("http://localhost:5000/api/auth/signup", {  // 🔹 FIXED API ROUTE
+            const res = await fetch(`${backendURL}/api/auth/signup`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, password })
+                body: JSON.stringify({ name, email, password }),
             });
 
             const data = await res.json();
-            
+
             if (!res.ok) {
                 alert(data.message || "Signup failed.");
                 return;
