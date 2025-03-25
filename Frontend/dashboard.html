@@ -7,12 +7,12 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <canvas id="starsCanvas"></canvas>  <!-- Background Animation -->
+  <canvas id="starsCanvas"></canvas>
 
-  <!-- Logout Button (Top Right) -->
+  <!-- ✅ Logout Button (Fixed Position) -->
   <button class="logout-btn" onclick="logout()">Logout</button>
 
-  <!-- Navigation Bar -->
+  <!-- ✅ Navigation Bar -->
   <nav>
     <ul class="nav-menu">
       <li><a href="#" onclick="showSection('home')">Home</a></li>
@@ -22,26 +22,19 @@
     </ul>
   </nav>
 
-  <br><br>
-
-  <!-- Page Sections -->
+  <!-- ✅ Sections -->
   <div class="container">
-    
-    <!-- Home Section -->
     <section id="home" class="page active">
       <h1>Welcome to SWASTHA 💖</h1>
       <p>Your safe space for mental well-being.</p>
     </section>
 
-    <!-- Affirmations Section -->
     <section id="affirmations" class="page">
       <h1>Daily Affirmations ✨</h1>
-      <p>"You are enough. You are strong. You are loved."</p>
+      <p>"You are strong and capable!"</p>
       <p>"Every challenge is an opportunity to grow."</p>
-      <p>"Your emotions are valid, and you are doing your best."</p>
     </section>
 
-    <!-- Mood Tracker Section -->
     <section id="mood" class="page">
       <h1>Your Mood Tracker 😊</h1>
       <form id="moodForm">
@@ -50,39 +43,28 @@
           <option value="Happy">😊 Happy</option>
           <option value="Neutral">😐 Neutral</option>
           <option value="Sad">😢 Sad</option>
-        </select> <br> <br>
-         <div class="voice-input">
-        <input type="text" id="moodDescription" placeholder="Describe your mood">
-        <button type="button" id="startRecording">🎤</button>
-    </div>
-    
-    <br><br>
-    <button type="submit">Save Mood</button> 
+        </select>
+        <br><br>
+        <button type="submit">Save Mood</button> 
       </form>
-      <h2>Your Past Moods</h2>
       <ul id="moodList"></ul>
     </section>
 
-    <!-- Advice Section -->
     <section id="advice" class="page">
       <h1>Self-Care Advice 🌸</h1>
-      <p>Click below to get AI-powered self-care advice based on your mood.</p>
       <button id="getAdviceBtn">Get Advice</button>
       <p id="adviceText"></p>
 
       <div id="backupResources" class="hidden">
-        <h3>💡 Since AI isn't responding right now, check out these self-care resources:</h3>
-        <ul class="advice-links">
-          <li><a href="https://www.youtube.com/watch?v=inpok4MKVLM" target="_blank">10 Min Guided Meditation</a></li>
-          <li><a href="https://www.youtube.com/watch?v=6p_yaNFSYao" target="_blank">Breathing Exercise for Relaxation</a></li>
-          <li><a href="https://www.youtube.com/watch?v=z6X5oEIg6Ak" target="_blank">5-Min Stress Relief Tips</a></li>
+        <h3>💡 AI isn't responding? Check these:</h3>
+        <ul>
+          <li><a href="https://www.youtube.com/watch?v=inpok4MKVLM" target="_blank">10 Min Meditation</a></li>
+          <li><a href="https://www.youtube.com/watch?v=6p_yaNFSYao" target="_blank">Breathing Exercise</a></li>
         </ul>
       </div>
     </section>
-
   </div>
 
   <script src="dashboard.js"></script>
-  <script src="background.js"></script>  <!-- Starry Background Animation -->
 </body>
 </html>
