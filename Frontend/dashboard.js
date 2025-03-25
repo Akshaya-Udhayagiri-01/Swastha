@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    const backendURL = "https://swastha-jgce.onrender.com";  // Use deployed backend URL
+    const backendURL = "https://swastha-jgce.onrender.com";  // ✅ Deployed Backend URL
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -15,6 +15,54 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
         document.getElementById(sectionId).classList.add("active");
     };
+
+    // ✅ Fetch & Save Mood
+    document.getElementById("moodForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const mood = document.getElementById("moodSelect").value;
+        const description = document.getElementById("moodDescription").value;
+
+        try {
+            const res = await fetch(`${backendURL}/api/moods`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({ mood, description }),
+            });
+
+            const data = await res.json();
+            if (res.ok) {
+                alert("Mood saved successfully!");
+                window.location.reload();
+            } else {
+                throw new Error(data.message || "Failed to save mood");
+            }
+        } catch (error) {
+            alert(`❌ Error: ${error.message}`);
+        }
+    });
+
+    // ✅ Fetch Past Moods
+    try {
+        const res = await fetch(`${backendURL}/api/moods`, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+
+        const moods = await res.json();
+        const moodList = document.getElementById("moodList");
+        moodList.innerHTML = ""; // Clear previous entries
+
+        moods.forEach((mood) => {
+            const li = document.createElement("li");
+            li.innerText = `${mood.mood} - ${mood.description}`;
+            moodList.appendChild(li);
+        });
+    } catch (error) {
+        console.error("Failed to load past moods", error);
+    }
 
     // ✅ AI Advice Function
     document.getElementById("getAdviceBtn").addEventListener("click", async () => {
@@ -49,7 +97,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-    // ✅ Logout Function (With Confirmation)
+    // ✅ Logout Function (Fixed)
     window.logout = function () {
         if (confirm("Are you sure you want to logout?")) {
             localStorage.removeItem("token");
