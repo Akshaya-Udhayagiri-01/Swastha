@@ -8,6 +8,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
+    // ✅ Verify Token Validity by Making a Backend Request
+    try {
+        const res = await fetch(`${backendURL}/api/auth/validate-token`, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (!res.ok) {
+            localStorage.removeItem("token");
+            window.location.href = "login.html";
+        }
+    } catch (error) {
+        console.error("Token validation failed:", error);
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+    }
+
     // ✅ Dynamic Page Navigation
     window.showSection = function (sectionId) {
         document.querySelectorAll(".page").forEach((section) => {
