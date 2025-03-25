@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const protect = require("../middleware/authMiddleware");  // ✅ Middleware to protect routes
 
 const router = express.Router();
 
@@ -51,6 +52,11 @@ router.post("/login", async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
+});
+
+// ✅ Token Validation Route (IMPORTANT)
+router.get("/validate-token", protect, (req, res) => {
+    res.json({ message: "Token is valid" });
 });
 
 module.exports = router;
