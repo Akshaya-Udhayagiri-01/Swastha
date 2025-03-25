@@ -1,12 +1,14 @@
 document.addEventListener("DOMContentLoaded", async () => {
+    const backendURL = "https://swastha-jgce.onrender.com";  // Use deployed backend URL
     const token = localStorage.getItem("token");
+
     if (!token) {
         alert("Please log in first!");
         window.location.href = "login.html";
         return;
     }
 
-    // 🔹 Dynamic Page Navigation
+    // ✅ Dynamic Page Navigation
     window.showSection = function (sectionId) {
         document.querySelectorAll(".page").forEach((section) => {
             section.classList.remove("active");
@@ -14,18 +16,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById(sectionId).classList.add("active");
     };
 
-    // 🔹 AI Advice Function
+    // ✅ AI Advice Function
     document.getElementById("getAdviceBtn").addEventListener("click", async () => {
         const mood = document.getElementById("moodSelect").value;
         const adviceText = document.getElementById("adviceText");
         const backupResources = document.getElementById("backupResources");
 
-        // Show loading message
         adviceText.innerText = "Fetching advice... Please wait. ⏳";
-        backupResources.classList.add("hidden");  
+        backupResources.classList.add("hidden");
 
         try {
-            const res = await fetch("http://localhost:5000/api/ai/advice", {
+            const res = await fetch(`${backendURL}/api/ai/advice`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -41,18 +42,31 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
 
             adviceText.innerText = `✨ ${data.advice}`;
-            backupResources.classList.add("hidden");  // Hide backup links
+            backupResources.classList.add("hidden");
         } catch (error) {
             adviceText.innerText = "⚠️ AI is unavailable. Check these self-care resources below! 💡";
-            backupResources.classList.remove("hidden");  // Show backup links
+            backupResources.classList.remove("hidden");
         }
     });
 
-    // 🔹 Logout Function (With Confirmation)
+    // ✅ Logout Function (With Confirmation)
     window.logout = function () {
         if (confirm("Are you sure you want to logout?")) {
             localStorage.removeItem("token");
             window.location.href = "login.html";
         }
     };
+
+    // ✅ Voice Input for Mood Description
+    document.getElementById("startRecording").addEventListener("click", () => {
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = "en-US";
+
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            document.getElementById("moodDescription").value = transcript;
+        };
+
+        recognition.start();
+    });
 });
