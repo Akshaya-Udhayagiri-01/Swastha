@@ -51,8 +51,13 @@
           <option value="Neutral">😐 Neutral</option>
           <option value="Sad">😢 Sad</option>
         </select> <br> <br>
-        <input type="text" id="moodDescription" placeholder="Describe your mood"><br><br>
-        <button type="submit">Save Mood</button> 
+         <div class="voice-input">
+        <input type="text" id="moodDescription" placeholder="Describe your mood">
+        <button type="button" id="startRecording">🎤</button>
+    </div>
+    
+    <br><br>
+    <button type="submit">Save Mood</button> 
       </form>
       <h2>Your Past Moods</h2>
       <ul id="moodList"></ul>
