@@ -5,12 +5,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (signupForm) {
         signupForm.addEventListener("submit", async (e) => {
             e.preventDefault();
-            
+
             const name = document.getElementById("signupName").value;
             const email = document.getElementById("signupEmail").value;
             const password = document.getElementById("signupPassword").value;
 
-            const res = await fetch("http://localhost:5000/api/auth/signup", {
+            const res = await fetch("https://swastha-backend.onrender.com/api/auth/signup", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ name, email, password }),
@@ -30,11 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (loginForm) {
         loginForm.addEventListener("submit", async (e) => {
             e.preventDefault();
-            
+
             const email = document.getElementById("loginEmail").value;
             const password = document.getElementById("loginPassword").value;
 
-            const res = await fetch("http://localhost:5000/api/auth/login", {
+            const res = await fetch("https://swastha-backend.onrender.com/api/auth/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password }),
