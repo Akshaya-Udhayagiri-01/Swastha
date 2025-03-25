@@ -82,12 +82,24 @@ button:hover {
 
 /* Logout Button */
 .logout-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
     background: #ff5e78;
+    color: white;
+    padding: 6px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .logout-btn:hover {
     background: #ff3b6c;
+    transform: scale(1.1);
 }
+
 
 /* Dashboard Page */
 .dashboard {
