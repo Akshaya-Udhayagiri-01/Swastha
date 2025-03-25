@@ -100,6 +100,24 @@ button:hover {
     transform: scale(1.1);
 }
 
+/* 🎨 Styled Mood Select Dropdown */
+#moodSelect {
+    width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background: white;
+    color: #333;
+}
+
+#moodSelect:focus {
+    outline: none;
+    border-color: #ff5e78;
+    box-shadow: 0 0 10px rgba(255, 94, 120, 0.5);
+}
+
+
 
 /* Dashboard Page */
 .dashboard {
